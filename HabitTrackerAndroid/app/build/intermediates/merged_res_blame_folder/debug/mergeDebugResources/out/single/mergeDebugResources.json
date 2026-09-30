@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.habittracker.app-debug-43:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.habittracker.app-main-45:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.habittracker.app-debug-43:/xml_backup_rules.xml.flat",
+        "source": "com.habittracker.app-main-45:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.habittracker.app-debug-43:/mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "com.habittracker.app-main-45:/mipmap-anydpi/ic_launcher.xml"
+    }
+]

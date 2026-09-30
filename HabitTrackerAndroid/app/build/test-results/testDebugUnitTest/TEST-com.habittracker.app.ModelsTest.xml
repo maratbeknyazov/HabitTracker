@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.habittracker.app.ModelsTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-09-30T21:51:59" hostname="ALBERT" time="0.161">
+  <properties/>
+  <testcase name="ratioForDate_emptyHabitsSafe" classname="com.habittracker.app.ModelsTest" time="0.115"/>
+  <testcase name="monthStats_planCappedByElapsedDays" classname="com.habittracker.app.ModelsTest" time="0.018"/>
+  <testcase name="daysLeft_futurePastToday" classname="com.habittracker.app.ModelsTest" time="0.004"/>
+  <testcase name="dayPercent_basic" classname="com.habittracker.app.ModelsTest" time="0.0"/>
+  <testcase name="monthGrid_startsMonday_andCoversWholeMonth" classname="com.habittracker.app.ModelsTest" time="0.009"/>
+  <testcase name="monthGrid_febLeapYear" classname="com.habittracker.app.ModelsTest" time="0.0"/>
+  <testcase name="daysLeft_monthAndYearBoundaries" classname="com.habittracker.app.ModelsTest" time="0.001"/>
+  <testcase name="startOfWeekMonday_handlesWeekBoundaries" classname="com.habittracker.app.ModelsTest" time="0.0"/>
+  <testcase name="monthStats_countsOnlyCurrentMonth_andClamps" classname="com.habittracker.app.ModelsTest" time="0.011"/>
+  <testcase name="clamp_bounds" classname="com.habittracker.app.ModelsTest" time="0.0"/>
+  <testcase name="keyOf_padsMonthAndDay" classname="com.habittracker.app.ModelsTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
