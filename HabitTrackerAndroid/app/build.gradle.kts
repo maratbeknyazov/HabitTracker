@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -12,9 +14,17 @@ android {
         applicationId = "com.habittracker.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 2
-        versionName = "1.1"
+        versionCode = 3
+        versionName = "1.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // Ключ ИИ задать в local.properties (не коммитится):
+        //   AI_API_KEY=...  или webhook n8n: AI_WEBHOOK_URL=https://n8n.example.com/webhook/schedule
+        val props = Properties().apply {
+            val f = rootProject.file("local.properties")
+            if (f.exists()) f.inputStream().use { load(it) }
+        }
+        buildConfigField("String", "AI_WEBHOOK_URL", "\"${props.getProperty("AI_WEBHOOK_URL", "")}\"")
+        buildConfigField("String", "AI_API_KEY", "\"${props.getProperty("AI_API_KEY", "")}\"")
     }
 
     buildTypes {
@@ -31,6 +41,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     testOptions {
         unitTests.isReturnDefaultValues = true

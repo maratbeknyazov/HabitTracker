@@ -10,7 +10,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import java.time.LocalDate
 
-enum class Tab { Tracker, Calendar, Plan }
+enum class Tab { Tracker, Calendar, Plan, Schedule, Ai }
 
 /**
  * Holds all app state. `today` is recomputed on every [refreshDay] (ON_RESUME),
@@ -109,6 +109,13 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     fun removeTask(id: Long) {
         tasks = tasks.filter { it.id != id }
+        persistAll()
+    }
+
+    /** Импорт задач, сгенерированных ИИ. */
+    fun addTasks(newTasks: List<Task>) {
+        if (newTasks.isEmpty()) return
+        tasks = tasks + newTasks
         persistAll()
     }
 

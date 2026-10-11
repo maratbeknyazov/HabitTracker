@@ -10,9 +10,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Checklist
 import androidx.compose.material.icons.filled.Dashboard
+import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -58,7 +60,9 @@ fun HabitApp() {
             val items = listOf(
                 Triple(Tab.Tracker, Icons.Filled.Dashboard, "Трекер"),
                 Triple(Tab.Calendar, Icons.Filled.CalendarMonth, "Календарь"),
-                Triple(Tab.Plan, Icons.Filled.Checklist, "План")
+                Triple(Tab.Plan, Icons.Filled.Checklist, "План"),
+                Triple(Tab.Schedule, Icons.Filled.Schedule, "Расписание"),
+                Triple(Tab.Ai, Icons.Filled.AutoAwesome, "ИИ")
             )
             NavigationBar(containerColor = Surface, tonalElevation = 0.dp) {
                 items.forEach { (t, icon, label) ->
@@ -83,6 +87,8 @@ fun HabitApp() {
             when (tab) {
                 Tab.Calendar.name -> CalendarScreen(vm)
                 Tab.Plan.name -> PlanScreen(vm)
+                Tab.Schedule.name -> ScheduleScreen(vm)
+                Tab.Ai.name -> AiScreen(vm)
                 else -> TrackerScreen(vm)
             }
         }

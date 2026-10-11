@@ -1,128 +1,86 @@
-# HabitTracker
+# 📱 Habit Tracker — Kotlin + Jetpack Compose
 
-HabitTracker — локальный трекер привычек, ежедневных показателей и задач. Репозиторий содержит нативное Android-приложение на Kotlin/Jetpack Compose и веб-версию на React/TypeScript.
+Личный трекер привычек: **Трекер + Календарь + План на день** в тёмной теме. Портирован с React-монолита ([Habittraker.jsx](Habittraker.jsx)) на нативный Android.
 
-## Скриншоты
+**APK: [HabitTracker-v1.2.apk](HabitTracker-v1.2.apk)** (16 МБ, Android 8.0+ / API 26) · [AUDIT-отчёт](HabitTrackerAndroid/AUDIT.md)
 
-| Трекер привычек | Планировщик |
+---
+
+## 🖼 Скриншоты
+
+| Трекер — кольцо прогресса | Кольцо растёт при отметке |
 |---|---|
-| ![Экран трекера привычек](screenshots/01-tracker.png) | ![Экран планировщика](screenshots/03-plan.png) |
-| **Отметка выполнения** | **Кольцо прогресса** |
-| ![Привычка после отметки](screenshots/16-after.png) | ![Кольцо прогресса после выполнения](screenshots/17-ring-after.png) |
+| ![Трекер](screenshots/01-tracker.png) | ![Анимация кольца](screenshots/17-ring-after.png) |
 
-## Возможности
+| Привычки и показатели дня | Календарь-heatmap |
+|---|---|
+| ![Список привычек](screenshots/04-tracker-bottom.png) | ![Календарь](screenshots/02-calendar.png) |
 
-- отметка выполнения привычек по дням;
-- дневной и месячный прогресс;
-- календарь с историей активности;
-- планировщик задач с категориями, приоритетами, сроками и статусами;
-- учёт сна, количества слов и настроения;
-- анимации прогресса, тактильный отклик и адаптивный интерфейс в Android-версии;
-- локальное хранение данных без регистрации и доступа к интернету.
+| План на день | Отметка «сделано» |
+|---|---|
+| ![План](screenshots/03-plan.png) | ![Чекбокс](screenshots/11-after-check.png) |
 
-## Готовая Android-версия
+| Расписание — воскресенье | Расписание — бюджет и правила |
+|---|---|
+| ![Расписание](screenshots/20-schedule-tab.png) | ![Правила](screenshots/22-schedule-budget.png) |
 
-В корне репозитория находится готовый APK:
+| Расписание — бюджет | ИИ-расписание |
+|---|---|
+| ![Бюджет](screenshots/23-schedule-wed.png) | ![ИИ](screenshots/24-ai-buttons.png) |
 
-- `HabitTracker-v1.1.apk` — актуальная версия 1.1;
-- `HabitTracker-debug.apk` — отладочная сборка.
+## ✨ Возможности
 
-Для установки разрешите установку приложений из неизвестных источников и откройте APK на устройстве. Минимальная поддерживаемая версия — Android 8.0 (API 26).
+- **Трекер** — кольцо дня/месяца с пружинной анимацией и счётчиком процентов, топ-3 привычки месяца, чек-лист с точками недели, показатели дня (сон ±1ч, настроение 😔😐🙂😀🤩, слова ±50)
+- **Календарь** — месячная сетка (Пн-старт), heatmap по доле выполненных привычек, тап по дню → отметка привычек за любую дату
+- **План на день** — задачи с категорией/приоритетом/статусом/датой, статистика по категориям и донат по статусам, цитата «ДИСЦИПЛИНА»
+- **Расписание недели (v1.2)** — персональная «Идеальная неделя»: тайм-слоты Пн–Вс под реальное расписание универа (пары после 14:20, зал в 12:00 Пн/Ср/Пт, среда без пар), цветные метки типов активностей (пары/зал/учёба/английский/дорога/сон), таблица бюджета $150/мес с полосками и «Ключевые правила успеха»
+- **ИИ-расписание (v1.2)** — опишешь свой распорядок текстом → приложение отправляет промпт в **n8n webhook** или **бесплатный LLM** (Google AI Studio / Gemini free tier) и превращает ответ в задачи вкладки «План». Ключ/адрес задаются в `local.properties` (не коммитятся): `AI_WEBHOOK_URL=…` либо `AI_API_KEY=…`
+- **UX-слой v1.1**: bounce-галочка + вибрация при «сделано», press-scale на всех кнопках, свечение кольца и «🎉 Идеальный день!» при 100%, плавные бары прогресса
+- **Данные** — SharedPreferences (JSON), автосохранение на каждой мутации, seed-данные при первом запуске
 
-> APK подписан отладочным ключом и предназначен для тестирования, а не для публикации в Google Play.
+## 🛠 Стек
 
-## Структура проекта
+Kotlin 2.0 · Jetpack Compose + Material 3 · Canvas-графики (без сторонних чартов) · AndroidViewModel · Gradle 8.9 (wrapper включён) · minSdk 26 / target 35
 
-```text
-.
-├── HabitTrackerAndroid/   # Нативное Android-приложение
-├── Habittraker/           # Веб-версия на React/TypeScript
-├── screenshots/           # Скриншоты интерфейса
-├── HabitTracker-v1.1.apk  # Готовая Android-сборка
-└── Habittraker.jsx        # Исходный JSX-прототип
-```
-
-## Запуск Android-приложения
-
-### Требования
-
-- Android Studio с Android SDK 35;
-- JDK 17;
-- Android-устройство или эмулятор с API 26+.
-
-Откройте каталог `HabitTrackerAndroid` в Android Studio, дождитесь синхронизации Gradle и запустите конфигурацию `app`.
-
-Сборка из терминала:
+## 🚀 Сборка и запуск
 
 ```bash
 cd HabitTrackerAndroid
-./gradlew assembleDebug
+./gradlew assembleDebug        # APK: app/build/outputs/apk/debug/app-debug.apk
+./gradlew testDebugUnitTest    # 19 unit-тестов логики
+./gradlew lint                 # 0 errors
 ```
 
-В Windows:
+Либо возьмите готовый [HabitTracker-v1.2.apk](HabitTracker-v1.2.apk): скопируйте на телефон и откройте (разрешите установку из неизвестных источников).
 
-```powershell
-cd HabitTrackerAndroid
-.\gradlew.bat assembleDebug
+### Подключение ИИ (n8n / бесплатный LLM)
+
+1. **n8n**: создайте workflow с Webhook-узлом (метод POST), в `HabitTrackerAndroid/local.properties` добавьте строку `AI_WEBHOOK_URL=https://твой-n8n/webhook/schedule` и пересоберите APK. Ответ ожидается как `"output"` в JSON или простой текст.
+2. **Google AI Studio (бесплатно)**: получите ключ на ai.google.dev, добавьте `AI_API_KEY=…` в `local.properties` и пересоберите. Приложение шлёт промпт на `gemini-1.5-flash` (free tier).
+3. Ответ ИИ парсится построчно в задачи вкладки «План»: строки вида `08:00–10:30 Java/Kotlin — ООП` станут задачами на сегодня.
+
+## 📂 Структура
+
+```
+HabitTrackerAndroid/app/src/main/java/com/habittracker/app/
+├── Models.kt          # домен: Habit/Task/DailyLog, даты, dayPercent/monthStats
+├── ScheduleData.kt    # персональное недельное расписание, бюджет $150, правила
+├── ScheduleScreen.kt  # вкладка «Расписание»: дни, тайм-слоты, бюджет
+├── AiScreen.kt        # вкладка «ИИ»: промпт → n8n/Gemini → задачи
+├── Store.kt           # seed-данные + JSON (де)сериализация
+├── AppViewModel.kt    # состояние + persist, пересчёт «сегодня» на resume
+├── Theme.kt           # палитра #0B0E14 / #F2A65A …, типографика
+├── HabitApp.kt        # Scaffold, нижняя навигация (5 вкладок), pressable
+├── RingProgress.kt    # анимированное кольцо + glow при 100%
+├── Common.kt          # CheckSquare (bounce+haptic), бары, точки недели
+├── TrackerScreen.kt   # экран Трекера
+├── CalendarScreen.kt  # экран Календаря
+├── PlanScreen.kt      # экран Плана
+└── Haptics.kt         # тактильная обратная связь
 ```
 
-Собранный APK появится в `HabitTrackerAndroid/app/build/outputs/apk/debug/`.
+## ✅ Качество
 
-Проверки Android-проекта:
-
-```powershell
-.\gradlew.bat test
-.\gradlew.bat lint
-```
-
-## Запуск веб-версии
-
-### Требования
-
-- Node.js 18+;
-- npm.
-
-```bash
-cd Habittraker
-npm install
-npm start
-```
-
-После запуска приложение будет доступно по адресу `http://localhost:3000`.
-
-Другие команды:
-
-```bash
-npm test       # unit-тесты
-npm run build  # production-сборка
-```
-
-## Технологии
-
-### Android
-
-- Kotlin 2.0;
-- Jetpack Compose и Material 3;
-- Android ViewModel;
-- SharedPreferences и JSON для локального хранения;
-- JUnit 4.
-
-### Web
-
-- React 18;
-- TypeScript 5;
-- Recharts;
-- Jest и Testing Library;
-- Create React App.
-
-## Хранение данных
-
-Привычки, задачи и дневные показатели сохраняются только на устройстве. Android-приложение не запрашивает разрешения и не требует сетевого подключения.
-
-## Статус
-
-Android-версия 1.1 прошла unit-тесты и lint-проверку. Подробные результаты и история исправлений находятся в [`HabitTrackerAndroid/AUDIT.md`](HabitTrackerAndroid/AUDIT.md).
-
-## Лицензия
-
-Лицензия пока не указана. Перед распространением или использованием проекта в коммерческих целях добавьте файл `LICENSE`.
+- 19/19 unit-тестов (даты, сетка месяца, monthStats, JSON round-trip)
+- Android Lint: 0 errors
+- Протестировано на эмуляторе API 36: скроллы, все 5 вкладок, отметки — 0 крашей
